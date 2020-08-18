@@ -10,6 +10,7 @@ import {Button,
   Image
 } from 'react-bootstrap';
 
+
 function Auth() {
 
     const [auth, setAuth] = useState(false);
@@ -17,13 +18,13 @@ function Auth() {
     let email = auth ? 
       <Form.Group>
         <Form.Label>Enter your email:</Form.Label>
-        <Form.Control type = "email" />
+        <Form.Control type = "email" placeholder = "yourEmail@.com" />
       </Form.Group>
       : null;
   
   
     return (
-      <div className="d-flex align-items-center justify-content-center">
+      <div className="d-flex justify-content-center">
         <Image className = "backgroundImage"  src = "background.png"/>
         <div className="Auth">
           <Container style = {{minWidth: '350px', width: '40px'}}>
@@ -33,14 +34,14 @@ function Auth() {
                 <Form>
                   <Form.Group>
                     <Form.Label>Enter your login:</Form.Label>
-                    <Form.Control type = "text" />
+                    <Form.Control type = "text" placeholder = "login" />
                   </Form.Group>
                   
                   {email}
   
                   <Form.Group>
                     <Form.Label>Enter your password:</Form.Label>
-                    <Form.Control type = "text" />
+                    <Form.Control type = "text" placeholder = "password" />
                   </Form.Group>
   
   

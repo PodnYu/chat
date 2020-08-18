@@ -1,7 +1,9 @@
 .Auth {
     font-size: 1.4em;
-    position: absolute;
+    position: fixed;
+    margin-top: 8%;
 }
+
 .backgroundImage {
   max-height: 850px;
 }
