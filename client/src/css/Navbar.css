@@ -1,0 +1,18 @@
+.navLink {
+    color: #999b9e;
+    font-weight: 500;
+    transition: 500ms;
+}
+
+.navLink::after {
+    display: block;
+    content: "";
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width 500ms;
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
