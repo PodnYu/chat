@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './Auth.css';
+import '../css/Auth.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, 
@@ -56,6 +56,6 @@ function Auth() {
       </div>
     );
 
-    }
+}
 
   export default Auth;
