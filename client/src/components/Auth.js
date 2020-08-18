@@ -6,7 +6,8 @@ import {Button,
   Container, 
   Card, 
   Form,
-  Alert
+  Alert,
+  Image
 } from 'react-bootstrap';
 
 function Auth() {
@@ -22,7 +23,9 @@ function Auth() {
   
   
     return (
-      <div className="Auth">
+      <div className="d-flex align-items-center justify-content-center">
+        <Image className = "backgroundImage"  src = "background.png"/>
+        <div className="Auth">
           <Container style = {{minWidth: '350px', width: '40px'}}>
             <Card>
               <Card.Body>
@@ -53,6 +56,7 @@ function Auth() {
               </Card.Body>      
             </Card>
           </Container>
+        </div>
       </div>
     );
 

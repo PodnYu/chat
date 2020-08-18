@@ -4,17 +4,11 @@ import Header from './components/Header';
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, 
-  Container, 
-  Card, 
-  Form,
-  Alert
-} from 'react-bootstrap';
 
 function App() {
 
   return (
-    <div  className="App">
+    <div className="App">
       <Header />
       <Auth />
     </div>
@@ -26,7 +20,5 @@ function App() {
       console.log(await response.json());
   }
 }
-
-
 
 export default App;
