@@ -1,34 +1,59 @@
-import React from 'react';
-import '../css/Header.css';
-import { Navbar, Button, Nav } from 'react-bootstrap/';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import "../css/Header.css";
+import { Navbar, Button, Nav } from "react-bootstrap/";
+import { Link } from "react-router-dom";
 
-export default function Header(props)
-{
-    return (
-        <Navbar className = "border-bottom shadow-sm pr-3 pl-3" variant = "light" >
-            <Navbar.Brand className = "mr-auto">Brand</Navbar.Brand>
-            
-            
+export default function Header(props) {
+  // useEffect(() => {
+  //   console.log(`Header rendered, auth: ${props.auth}`);
+  // }, []);
 
-            <Nav>
-                <Nav.Item>
-                    {/* <Nav.Link className = "navLink mr-3" eventKey = "Lobby" href = "kek"> */}
-                    <Link className = "navLink nav-link mr-3 " to = "/login">Lobby</Link>
-                    {/* </Nav.Link> */}
-                </Nav.Item>
-                <Nav.Item>
-                    <Link className = "navLink nav-link mr-3" to = "/login">Top players</Link>
-                    {/* <Nav.Link className = "navLink mr-3" eventKey = "TopPlayers" href="#">Top players</Nav.Link> */}
-                </Nav.Item>
-                <Nav.Item>
-                    <Link className = "navLink nav-link mr-3" to = "/register">Profile</Link>
-                    {/* <Nav.Link className = "navLink mr-3" eventKey = "Profile" href="#">Profile</Nav.Link> */}
-                </Nav.Item>
-            </Nav>
+  // useEffect(() => {
+  //   console.log(`Header updated, auth: ${props.auth}, userName: ${props.userName}`);
+  // });
 
-            <Button variant = "outline-primary" className = "mt-2 mb-2">Sign up</Button>
-        </Navbar>
-        
-    )
+  //Using Navbar.Collapse generates a warning 'index.js:1 Warning: findDOMNode is deprecated in StrictMode.'
+  //when trying to collapse
+  return (
+    <Navbar className="border-bottom shadow-sm pr-3 pl-3" variant="light" expand='md'>
+      <Navbar.Brand className="mr-auto"><Link to="/home" style={{
+        textDecoration: 'none',
+        color: 'black'
+      }} >Dev{props.userName && ' : : ' + props.userName} </Link></Navbar.Brand>
+
+      <Navbar.Toggle aria-controls="navigation" />
+
+      <Navbar.Collapse id="navigation" >
+        <Nav className="ml-auto">
+
+          <Nav.Item>
+            <Link className="navLink nav-link mr-3" to="/home">
+              Home
+          </Link>
+          </Nav.Item>
+
+        </Nav>
+
+        <>
+          {props.auth ?
+
+            <>
+
+              <Button variant="outline-primary mt-2 mb-2 mr-2" onClick={props.logout}>
+                Logout
+            </Button>
+
+            </> :
+
+            <>
+              <Link to="login" className="btn btn-outline-primary mt-2 mb-2 mr-2">Sign In</Link>
+
+              <Link to="register" className="btn btn-outline-primary mt-2 mb-2">Sign Up</Link>
+            </>
+
+          }
+        </>
+      </Navbar.Collapse>
+    </Navbar >
+  );
 }

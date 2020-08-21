@@ -1,9 +1,20 @@
 .Auth {
     font-size: 1.4em;
-    position: fixed;
-    margin-top: 8%;
+    position: absolute;
+    /* position: fixed; */
+    margin-top: 6%;
 }
 
 .backgroundImage {
   max-height: 850px;
+}
+
+.error-msg {
+  margin: 10px 5px;
+  color: red;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
 }
