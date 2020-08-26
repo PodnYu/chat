@@ -1,0 +1,9 @@
+#messagesContainer {
+    /* width: 93%; */
+    /* width: 500px; */
+    height: 300px;
+    border: 1px solid black;
+    padding: 0px;
+    margin-bottom: 40px;
+    overflow: auto;
+}

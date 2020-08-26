@@ -59,7 +59,7 @@ function Auth({ isLogin, tryLogIn }) {
       <div className="Auth">
         <Container style={{ minWidth: '350px', width: '40px' }}>
           <Card>
-            <Card.Body style={{ paddingBottom: '15px' }}>
+            <Card.Body id="cardBody">
               {errorMsg && <Alert style={{ fontSize: '1em', padding: '5px 10px' }} variant="danger">{errorMsg}</Alert>}
               <Form>
                 <Form.Group>
@@ -98,13 +98,8 @@ function Auth({ isLogin, tryLogIn }) {
                 </Button>
 
                 {isLogin &&
-                  <Link to="register" style={{
-                    fontSize: '14px',
-                    textAlign: 'center'
-                  }}>
-                    <div style={{
-                      marginTop: '15px'
-                    }}>
+                  <Link to="register" id='registerLink' >
+                    <div id="noAccountLabel" >
                       Don't have an account?
                   </div>
                   </Link>
@@ -213,7 +208,6 @@ function Auth({ isLogin, tryLogIn }) {
     }
 
     //executing callback, passed through props by App to update authState
-    console.log('auth: ', login);
     tryLogIn(jsonData.isAuthenticated, jsonData.expiresIn, login);
   }
 

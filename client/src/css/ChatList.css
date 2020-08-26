@@ -1,0 +1,12 @@
+#chatListContainer {
+    margin-top: 100px;
+    width: 400px
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/* .roomNameBtn {
+    text-decoration: none;
+} */

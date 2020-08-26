@@ -1,0 +1,10 @@
+#message {
+    /* border: 1px solid rgb(82, 180, 245);
+    border-radius: 50%; */
+    margin: 5px 10px 0px;
+    padding: 5px 10px;
+}
+
+#messageContainer {
+    flex-wrap: wrap;
+}

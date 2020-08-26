@@ -1,0 +1,11 @@
+
+#chatContainer {
+    position: relative;
+    /* height: 400px; */
+    height: auto;
+    width: 400px;
+    border: 2px solid black;
+    /* background: blue; */
+    padding: 20px;
+}
+

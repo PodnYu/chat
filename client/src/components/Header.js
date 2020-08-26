@@ -32,6 +32,12 @@ export default function Header(props) {
           </Link>
           </Nav.Item>
 
+          <Nav.Item>
+            <Link className="navLink nav-link mr-3" to="/chatList">
+              Chat
+          </Link>
+          </Nav.Item>
+
         </Nav>
 
         <>
@@ -46,9 +52,9 @@ export default function Header(props) {
             </> :
 
             <>
-              <Link to="login" className="btn btn-outline-primary mt-2 mb-2 mr-2">Sign In</Link>
+              <Link to="/login" className="btn btn-outline-primary mt-2 mb-2 mr-2">Sign In</Link>
 
-              <Link to="register" className="btn btn-outline-primary mt-2 mb-2">Sign Up</Link>
+              <Link to="/register" className="btn btn-outline-primary mt-2 mb-2">Sign Up</Link>
             </>
 
           }

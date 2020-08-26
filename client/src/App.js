@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import Auth from "./components/Auth";
 import Header from "./components/Header";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ChatList from './components/ChatList';
+import Chat from './components/Chat';
 import "./App.css";
 
 import {
   BrowserRouter as Router,
   Route,
-  Redirect
+  Redirect,
+  Switch
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -51,7 +54,16 @@ function App() {
         <Auth isLogin={false} tryLogIn={tryLogIn} />
       </Route>
 
-      <ProtectedRoute path="/home" auth={auth} color='blue' component={DummyComponent} />
+      <ProtectedRoute exact path="/home" auth={auth} color='blue' component={DummyComponent} />
+
+      {/* <ProtectedRoute exact path="/chatList" auth={auth} component={ChatList} /> */}
+      <Route path="/chatList">
+        <ChatList auth={auth} />
+      </Route>
+
+      <Route path="/chat/:room">
+        <Chat auth={auth} user={userName} />
+      </Route>
 
     </Router >
   );
@@ -59,7 +71,7 @@ function App() {
   return <div className="App">{content}</div>;
 
   async function isAuthenticated() {
-    let url = "checkAuth";
+    let url = "/checkAuth";
     let response = await fetch(url);
     let data = await response.json();
     return data;
@@ -70,7 +82,6 @@ function App() {
 
     if (authState) {
       setAuth(authState);
-      console.log('app', newUserName);
       setUserName(newUserName);
     }
     //Here we can set callback to execute when cookie expires 
@@ -87,7 +98,7 @@ function App() {
 
     console.log('log out');
 
-    let url = 'logout';
+    let url = '/logout';
     fetch(url, {
       method: 'POST'
     }).then(() => {

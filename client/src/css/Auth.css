@@ -5,6 +5,10 @@
     margin-top: 6%;
 }
 
+#cardBody {
+  padding-bottom: 15px; 
+}
+
 .backgroundImage {
   max-height: 850px;
 }
@@ -17,4 +21,13 @@
 
 .hidden {
   display: none;
+}
+
+#registerLink {
+  font-size: 14px;
+  text-align: center;
+}
+
+#noAccountLabel {
+  margin-top: 15px;
 }
