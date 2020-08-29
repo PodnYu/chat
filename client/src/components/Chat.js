@@ -7,21 +7,22 @@ import Messages from './Messages';
 
 import { useParams } from 'react-router-dom';
 
-import { Container } from 'react-bootstrap';
+import { Container, Dropdown } from 'react-bootstrap';
 
 let io;
 export default function Chat(props) {
-
-    // let user = 'Alex';
 
     let user = props.user;
 
     const [messages, setMessages] = useState([]);
 
+    const [participants, setParticipants] = useState([]);
+
     const { room } = useParams();
 
     useEffect(() => {
 
+        // io = socketio('http://localhost:5000');
         io = socketio('http://192.168.1.3:5000');
 
         io.emit('join', { user, room });
@@ -39,25 +40,48 @@ export default function Chat(props) {
             setMessages(m => [...m, message]);
         });
 
+        io.on('users', ({ users }) => {
+            console.log(users);
+            setParticipants(users);
+        });
+
+        io.on('userJoined', ({ user }) => {
+            console.log('User joined', user);
+            setParticipants(p => [...p, user]);
+        });
+
+        io.on('userLeft', ({ user }) => {
+            console.log('User left', user);
+            setParticipants(p => p.filter(participant => participant.userName !== user.userName));
+        });
+
         return () => {
             console.log('chat unmounted');
-            // io.disconnect({ user, cb: () => console.log('callback fired!') });
             io.emit('goingToDisconnect', { user, room });
             io.disconnect();
-            // io.off();
         }
 
     }, []);
 
-    useEffect(() => {
-        // console.log('messages updated: ', messages);
-    }, [messages]);
-
-
     return (
+
         <Container id='chatContainer'>
-            <h4 align="center">{room}</h4>
-            <div>
+            <Dropdown align='center' className='mb-2'>
+                <Dropdown.Toggle>
+                    {room}
+                </Dropdown.Toggle>
+
+                {participants.length > 0 &&
+                    <Dropdown.Menu>
+                        {
+                            participants.map((p, i) =>
+                                <Dropdown.Item key={i}>{p.userName}</Dropdown.Item>
+                            )
+                        }
+                    </Dropdown.Menu>
+                }
+            </Dropdown>
+            <div id='chatView'>
                 <Messages messages={messages} user={user} />
 
                 <ChatInput handleSend={handleSend} />
@@ -73,14 +97,7 @@ export default function Chat(props) {
             room
         }
 
-        // console.log(messages);
-        // setMessages([...messages, { user: data.user, text: data.text }]);
-
-        // console.log('data: ', data);
-
         io.emit('message', data);
-
-        console.log('Sent: ' + text);
 
         setMessages([...messages, { user: user, text: data.text }]);
     }

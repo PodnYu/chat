@@ -11,7 +11,7 @@ export default function ProtectedRoute({ component: Component, ...rest }) {
                     return <Component {...rest} {...props} />
                 }
                 else {
-                    return <Redirect to='login' />
+                    return <Redirect to='/login' />
                 }
             }
         } />

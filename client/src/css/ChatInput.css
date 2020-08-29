@@ -1,17 +1,6 @@
 #chatControls {
-    position: absolute;
-    width: 91%;
-    bottom: 10px;
-    /* display: flex; */
+    width: 100%;
 }
-
-#inputMsg {
-    /* padding-right: 0px; */
-}
-
-/* .inputCol {
-    padding: 0px 5px;
-} */
 
 #inputMsgCol {
     padding-right: 5px;

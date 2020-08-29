@@ -1,6 +1,7 @@
 #chatListContainer {
     margin-top: 100px;
-    width: 400px
+    min-width: 350px;
+    width: 25%;
 }
 
 a {

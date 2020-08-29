@@ -3,15 +3,21 @@
     position: absolute;
     /* position: fixed; */
     margin-top: 6%;
+    min-width: 350px;
+    width: 25%;
+}
+
+#authContainer {
+  
 }
 
 #cardBody {
   padding-bottom: 15px; 
 }
 
-.backgroundImage {
+/* .backgroundImage {
   max-height: 850px;
-}
+} */
 
 .error-msg {
   margin: 10px 5px;

@@ -1,10 +1,7 @@
 const express = require('express');
-// const app = require('express')();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const passportLocal = require('passport-local').Strategy;
-// const cookieParse = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const User = require('./User');
@@ -12,12 +9,8 @@ const User = require('./User');
 const app = express();
 
 const http = require('http').createServer(app);
-// const socketio = require('socket.io');
 const io = require('socket.io')(http);
 require('dotenv').config();
-
-// const server = http.createServer(app);
-// const io = socketio(server);
 
 mongoose.connect(process.env.MongoDBConnectionString, {
     useNewUrlParser: true,
@@ -55,8 +48,6 @@ app.use(passport.session());
 require('./passportConfig')(passport);
 
 const PORT = process.env.PORT || 5000;
-
-
 
 app.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
@@ -157,33 +148,8 @@ app.post('/logout', (req, res) => {
     res.json({ msg: 'OK' });
 });
 
-
-
+//passing io as a parameter so there is only one instance of it
 require('./socketsConfig')(io);
-// io.on('connection', socket => {
-//     console.log('user entered the chat!');
-
-//     socket.on('join', (data) => {
-//         console.log(`User ${data.user} joined the room '${data.room}'`);
-
-//         socket.emit('controlMessage', { user: 'control', text: `Welcome to the club, ${data.user}` });
-
-//         socket.broadcast.to(data.room).emit('controlMessage', { user: 'control', text: `${data.user} joined the club!` });
-
-//         socket.join(data.room);
-
-//     });
-
-//     socket.on('message', (message) => {
-//         socket.broadcast.to(message.room).emit('message', { user: message.user, text: message.text });
-//         // io.to(message.room).emit('message', { user: message.user, text: message.text });
-//         console.log(message);
-//     });
-
-//     socket.on('disconnect', () => {
-//         console.log('user left the chat!');
-//     })
-// });
 
 http.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);

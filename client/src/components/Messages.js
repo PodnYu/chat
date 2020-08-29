@@ -6,16 +6,11 @@ import Message from './Message';
 
 export default function Messages({ messages, user }) {
 
-    // useEffect(() => {
-    //     console.log('messages rendered', messages);
-    // }, []);
-
     const messagesContainerRef = useRef(null);
 
     useEffect(() => {
-        // console.log(user);
-        // console.log(messages);
-        // console.log('messages updated', messages);
+
+        //scroll to bottom only if the new added message was sent by client
         if (messages.length > 0 && messages[messages.length - 1].user === user)
             messagesContainerRef.current.scrollIntoView({ behavior: 'smooth' });
 

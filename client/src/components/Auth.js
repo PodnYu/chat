@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../css/Auth.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -13,6 +12,7 @@ import {
 
 import { Link } from 'react-router-dom';
 
+import '../css/Auth.css';
 
 //This component is being used both for login and register
 function Auth({ isLogin, tryLogIn }) {
@@ -23,14 +23,9 @@ function Auth({ isLogin, tryLogIn }) {
     password: ''
   }
 
-  // const [login, setLogin] = useState('');
-  // const [password, setPassword] = useState('');
-
   const [errorMsg, setErrorMsg] = useState('');
 
   const [errors, setErrors] = useState(Object.assign({}, initialErrorsState));
-
-
 
   let email = !isLogin ?
     <Form.Group>
@@ -40,24 +35,17 @@ function Auth({ isLogin, tryLogIn }) {
       } />
       <div className={
         errors['email'] ? 'error-msg' : 'hidden'
-      }>{errors['email']}</div>
+      }>{errors['email']}
+      </div>
     </Form.Group>
     : null;
-
-  useEffect(() => {
-    console.log(`Auth rendered`);
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(`Auth updated`);
-  // });
 
   return (
 
     <div className="d-flex justify-content-center">
-      <Image className="backgroundImage" src="background.png" />
+      {/* <Image className="backgroundImage" src="background.png" /> */}
       <div className="Auth">
-        <Container style={{ minWidth: '350px', width: '40px' }}>
+        <Container id='authContainer'>
           <Card>
             <Card.Body id="cardBody">
               {errorMsg && <Alert style={{ fontSize: '1em', padding: '5px 10px' }} variant="danger">{errorMsg}</Alert>}

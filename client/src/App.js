@@ -9,8 +9,7 @@ import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
-  Switch
+  Redirect
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,26 +21,26 @@ function App() {
   const [userName, setUserName] = useState('');
 
   //checking basicly in componentDidMount whether user is authenticated
+  //On every app refresh it will request the server and ask whether the user is authenticated
+  //ProtectedRoute checks auth
+  //So when refresh occurs, app sends request, on the same time protectedRoutes check auth
+  //by default it is 'false' so refreshing protected route user will be redirected to /login
+  //By that time the server will respond.
+  //If user isn't authenticated it will stay on /login else he/she will be redirected to /home
   useEffect(() => {
-    // console.log(`App rendered, auth: ${auth}`);
     isAuthenticated()
       .then(data => {
         setAuth(data.isAuthenticated);
+        setUserName(data.login);
         console.log('Fetched data', data);
       });
   }, []);
-
-  // useEffect(() => {
-  //   console.log(`App updated, auth: ${auth}`);
-  //   console.log('============================');
-  // });
 
   const content = (
     <Router>
 
       <Route path="/">
         <Header auth={auth} userName={userName} logout={logout} />
-        {/* <button type="button" onClick={() => setAuth(!auth)}>setAuth</button> */}
       </Route>
 
       <Route path="/login">
@@ -56,14 +55,15 @@ function App() {
 
       <ProtectedRoute exact path="/home" auth={auth} color='blue' component={DummyComponent} />
 
-      {/* <ProtectedRoute exact path="/chatList" auth={auth} component={ChatList} /> */}
-      <Route path="/chatList">
+      <ProtectedRoute exact path="/chatList" auth={auth} component={ChatList} />
+      {/* <Route path="/chatList">
         <ChatList auth={auth} />
-      </Route>
+      </Route> */}
 
-      <Route path="/chat/:room">
+      <ProtectedRoute exact path="/chat/:room" auth={auth} user={userName} component={Chat} />
+      {/* <Route path="/chat/:room">
         <Chat auth={auth} user={userName} />
-      </Route>
+      </Route> */}
 
     </Router >
   );
