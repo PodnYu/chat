@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import socketio from 'socket.io-client';
+import CryptoJS from 'crypto-js';
 import '../css/Chat.css';
 
 import ChatInput from './ChatInput';
@@ -22,8 +23,7 @@ export default function Chat(props) {
 
     useEffect(() => {
 
-        // io = socketio('http://localhost:5000');
-        io = socketio('http://192.168.1.3:5000');
+        io = socketio('http://localhost:5000');
 
         io.emit('join', { user, room });
 
@@ -32,6 +32,10 @@ export default function Chat(props) {
         });
 
         io.on('message', message => {
+
+            if (props.encryptionKey != '')
+                message.text = CryptoJS.AES.decrypt(message.text, props.encryptionKey).toString(CryptoJS.enc.Utf8);
+
             setMessages(m => [...m, message]);
             console.log('message: ', message);
         });
@@ -63,8 +67,15 @@ export default function Chat(props) {
 
     }, []);
 
-    return (
+    useEffect(() => {
+        // let encrypted = CryptoJS.AES.encrypt('myString', 'secret').toString();
+        // console.log('encrypted', encrypted);
+        // let decrypted = CryptoJS.AES.decrypt(encrypted, 'secret');
+        // console.log('decrypted', decrypted.toString(CryptoJS.enc.Utf8));
+        // console.log(props.encryptionKey);
+    }, []);
 
+    return (
         <Container id='chatContainer'>
             <Dropdown align='center' className='mb-2'>
                 <Dropdown.Toggle>
@@ -91,6 +102,11 @@ export default function Chat(props) {
 
     function handleSend(text) {
 
+        let clientText = text;
+        
+        if (props.encryptionKey != '')
+            text = CryptoJS.AES.encrypt(text, props.encryptionKey).toString();
+
         let data = {
             user,
             text,
@@ -99,7 +115,7 @@ export default function Chat(props) {
 
         io.emit('message', data);
 
-        setMessages([...messages, { user: user, text: data.text }]);
+        setMessages([...messages, { user: user, text: clientText }]);
     }
 
 }

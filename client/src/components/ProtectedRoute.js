@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 export default function ProtectedRoute({ component: Component, ...rest }) {
-    // console.log('protected route: ', rest);
     return (
         <Route path={rest.path} {...rest} render={
             props => {

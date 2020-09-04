@@ -4,13 +4,6 @@ import { Navbar, Button, Nav } from "react-bootstrap/";
 import { Link } from "react-router-dom";
 
 export default function Header(props) {
-  // useEffect(() => {
-  //   console.log(`Header rendered, auth: ${props.auth}`);
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(`Header updated, auth: ${props.auth}, userName: ${props.userName}`);
-  // });
 
   //Using Navbar.Collapse generates a warning 'index.js:1 Warning: findDOMNode is deprecated in StrictMode.'
   //when trying to collapse

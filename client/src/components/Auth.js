@@ -66,7 +66,7 @@ function Auth({ isLogin, tryLogIn }) {
 
                 <Form.Group>
                   <Form.Label>Enter your password:</Form.Label>
-                  <Form.Control type="text" placeholder="password" id="password" name="password" onChange={inputChangeHandler} maxLength='16' className={
+                  <Form.Control type="text" placeholder="password" id="password" value = 'test' name="password" onChange={inputChangeHandler} maxLength='16' className={
                     errors['password'] ? 'is-invalid' : ''
                   } />
                   <div className={

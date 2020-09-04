@@ -20,6 +20,8 @@ function App() {
 
   const [userName, setUserName] = useState('');
 
+  const [encryptionKey, setEncryptionKey] = useState('');
+
   //checking basicly in componentDidMount whether user is authenticated
   //On every app refresh it will request the server and ask whether the user is authenticated
   //ProtectedRoute checks auth
@@ -44,7 +46,7 @@ function App() {
       </Route>
 
       <Route path="/login">
-        {auth && <Redirect to="/home" />}
+        {auth && <Redirect to="/chatList" />}
         <Auth isLogin={true} tryLogIn={tryLogIn} />
       </Route>
 
@@ -55,15 +57,9 @@ function App() {
 
       <ProtectedRoute exact path="/home" auth={auth} color='blue' component={DummyComponent} />
 
-      <ProtectedRoute exact path="/chatList" auth={auth} component={ChatList} />
-      {/* <Route path="/chatList">
-        <ChatList auth={auth} />
-      </Route> */}
+      <ProtectedRoute exact path="/chatList" auth={auth} setEncryptionKey = {setEncKey} component={ChatList} />
 
-      <ProtectedRoute exact path="/chat/:room" auth={auth} user={userName} component={Chat} />
-      {/* <Route path="/chat/:room">
-        <Chat auth={auth} user={userName} />
-      </Route> */}
+      <ProtectedRoute exact path="/chat/:room" auth={auth} user={userName} encryptionKey = {encryptionKey} component={Chat} />
 
     </Router >
   );
@@ -106,6 +102,10 @@ function App() {
       setUserName('');
     });
 
+  }
+
+  function setEncKey(key) {
+    setEncryptionKey(key);
   }
 
 }

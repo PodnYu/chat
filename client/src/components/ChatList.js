@@ -4,7 +4,7 @@ import { Container, Button, Form, Card, Col } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 
-export default function ChatList({ auth }) {
+export default function ChatList({ auth, setEncryptionKey }) {
 
     const [room, setRoom] = useState('');
 
@@ -14,14 +14,20 @@ export default function ChatList({ auth }) {
                 <Card>
                     <Card.Body>
                         <Form>
+
                             <Form.Group>
                                 <Form.Label>Enter the Room Name:</Form.Label>
                                 <Form.Control type="text" onChange={(e) => setRoom(e.target.value)} autoFocus />
                             </Form.Group>
 
+                            <Form.Group>
+                                <Form.Label>Enter the Encryption Key:</Form.Label>
+                                <Form.Control type="text" id = 'encKey' />
+                            </Form.Group>
+
                             <Form.Row>
                                 <Col>
-                                    <Link className="linkToChat" to={`/chat/${room}`}>
+                                    <Link className="linkToChat" to={`/chat/${room}`} onClick = {setEncKey}>
                                         <Button type="button" className='roomNameBtn' block>
                                             Join
                                         </Button>
@@ -41,4 +47,9 @@ export default function ChatList({ auth }) {
             </Container>
         </div>
     );
+
+    function setEncKey() {
+        setEncryptionKey(document.getElementById('encKey').value);
+    }
+
 }
